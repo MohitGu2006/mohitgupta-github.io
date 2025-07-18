@@ -1,0 +1,446 @@
+/* CSS Variables for Theme Support */
+:root {
+    --primary-text: #ffffff;
+    --secondary-text: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+    --button-hover: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] {
+    --primary-text: #333333;
+    --secondary-text: #666666;
+    --card-bg: rgba(255, 255, 255, 0.25);
+    --card-border: rgba(255, 255, 255, 0.3);
+    --overlay-bg: rgba(255, 255, 255, 0.3);
+    --button-hover: rgba(255, 255, 255, 0.4);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animated Background */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* 3D Floating Geometric Shapes */
+.animated-background::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.6), rgba(118, 75, 162, 0.6));
+    transform: rotateX(45deg) rotateY(45deg);
+    animation: float3D 8s ease-in-out infinite, rotate3D 12s linear infinite;
+    border-radius: 20px;
+    box-shadow: 
+        0 0 50px rgba(102, 126, 234, 0.3),
+        inset -10px -10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.animated-background::after {
+    content: '';
+    position: absolute;
+    top: 60%;
+    right: 15%;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(245, 87, 108, 0.6), rgba(79, 172, 254, 0.6));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: rotateX(30deg) rotateZ(45deg);
+    animation: float3D 10s ease-in-out infinite reverse, rotate3D 15s linear infinite reverse;
+    box-shadow: 
+        0 0 40px rgba(245, 87, 108, 0.3),
+        inset -5px -5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional floating shapes */
+.geometric-shape-1 {
+    position: absolute;
+    top: 10%;
+    right: 25%;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(60deg, rgba(0, 242, 254, 0.5), rgba(118, 75, 162, 0.5));
+    border-radius: 50%;
+    animation: float3D 6s ease-in-out infinite, rotate3D 10s linear infinite;
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+}
+
+.geometric-shape-2 {
+    position: absolute;
+    bottom: 30%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(240, 147, 251, 0.5), rgba(245, 87, 108, 0.5));
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    animation: float3D 9s ease-in-out infinite, rotate3D 14s linear infinite reverse;
+    box-shadow: 0 0 35px rgba(240, 147, 251, 0.4);
+}
+
+.geometric-shape-3 {
+    position: absolute;
+    top: 70%;
+    right: 40%;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(150, 206, 180, 0.6), rgba(255, 234, 167, 0.6));
+    transform: rotateX(60deg) rotateY(30deg);
+    animation: float3D 7s ease-in-out infinite, rotate3D 11s linear infinite;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(150, 206, 180, 0.4);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float3D {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) rotateX(45deg) rotateY(45deg);
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px) rotateX(50deg) rotateY(40deg);
+    }
+    50% {
+        transform: translateY(-10px) translateX(-10px) rotateX(40deg) rotateY(50deg);
+    }
+    75% {
+        transform: translateY(-15px) translateX(5px) rotateX(55deg) rotateY(35deg);
+    }
+}
+
+@keyframes rotate3D {
+    0% {
+        transform: rotateZ(0deg) rotateX(45deg) rotateY(45deg);
+    }
+    100% {
+        transform: rotateZ(360deg) rotateX(45deg) rotateY(45deg);
+    }
+}
+
+
+
+/* Container */
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Profile Card - Glassmorphism Effect */
+.profile-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Profile Section */
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--card-border);
+    animation: profileImageFloat 3s ease-in-out infinite;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    margin-bottom: 10px;
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+.profile-bio {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    font-weight: 300;
+    animation: fadeIn 1s ease-out 0.6s both;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--primary-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.social-link i {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Platform-specific colors on hover */
+.social-link.youtube:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: #ff0000;
+}
+
+.social-link.instagram:hover {
+    background: rgba(225, 48, 108, 0.2);
+    border-color: #e1306c;
+}
+
+.social-link.telegram:hover {
+    background: rgba(0, 136, 204, 0.2);
+    border-color: #0088cc;
+}
+
+.social-link.email:hover {
+    background: rgba(234, 67, 53, 0.2);
+    border-color: #ea4335;
+}
+
+.social-link.website:hover {
+    background: rgba(66, 133, 244, 0.2);
+    border-color: #4285f4;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes profileImageFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Social link staggered animation */
+.social-link:nth-child(1) {
+    animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.social-link:nth-child(2) {
+    animation: fadeInUp 1s ease-out 1.1s both;
+}
+
+.social-link:nth-child(3) {
+    animation: fadeInUp 1s ease-out 1.3s both;
+}
+
+.social-link:nth-child(4) {
+    animation: fadeInUp 1s ease-out 1.5s both;
+}
+
+.social-link:nth-child(5) {
+    animation: fadeInUp 1s ease-out 1.7s both;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: fadeIn 1s ease-out 2s both;
+}
+
+.footer p {
+    color: var(--secondary-text);
+    font-size: 0.8rem;
+    font-weight: 300;
+    text-align: center;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--card-border);
+}
+
+.creator-name {
+    color: var(--primary-text);
+    font-weight: 600;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .profile-card {
+        padding: 30px 25px;
+        margin: 10px;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-name {
+        font-size: 1.6rem;
+    }
+
+    .profile-bio {
+        font-size: 0.9rem;
+    }
+
+    .social-link {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+    }
+
+    /* Smaller shapes for mobile */
+    .animated-background::before {
+        width: 100px;
+        height: 100px;
+    }
+
+    .animated-background::after {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .geometric-shape-1,
+    .geometric-shape-2,
+    .geometric-shape-3 {
+        display: none; /* Hide additional shapes on mobile for better performance */
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 25px 20px;
+    }
+
+    .profile-name {
+        font-size: 1.4rem;
+    }
+
+    .social-link {
+        padding: 10px 15px;
+    }
+}
+
+/* Small screens landscape orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+    .container {
+        align-items: flex-start;
+        padding-top: 20px;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+
+    .profile-card {
+        margin: 20px auto;
+    }
+}
