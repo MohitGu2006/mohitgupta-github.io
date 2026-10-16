@@ -1,76 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio Link - Social Media Creator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Mohit Gupta | Link in Bio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-canvas: #dcd6f7;
+            --card-surface: #ffffff;
+            --border-jet: #0a0a0a;
+            
+            --insta-bg: #ff2a85;
+            --telegram-bg: #0088cc;
+            --youtube-bg: #ff0033;
+            --github-bg: #24292e;
+            --twitter-bg: #000000;
+            --whatsapp-bg: #25d366;
+            
+            --shadow-brutal: 4px 4px 0px var(--border-jet);
+            --shadow-hover: 1px 1px 0px var(--border-jet);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            background-image: 
+                linear-gradient(45deg, rgba(10, 10, 10, 0.05) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(10, 10, 10, 0.05) 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, rgba(10, 10, 10, 0.05) 75%), 
+                linear-gradient(-45deg, transparent 75%, rgba(10, 10, 10, 0.05) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--border-jet);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100svh;
+            padding: 20px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-surface);
+            border: 3px solid var(--border-jet);
+            box-shadow: 8px 8px 0px var(--border-jet);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top Window OS Bar */
+        .window-bar {
+            background: var(--border-jet);
+            color: #ffffff;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--border-jet);
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #ffffff;
+            display: inline-block;
+        }
+
+        .dot-1 { background: #ff579f; }
+        .dot-2 { background: #ffde00; }
+        .dot-3 { background: #00f59b; }
+
+        .window-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #00f59b;
+        }
+
+        .content-body {
+            padding: 20px 18px;
+        }
+
+        /* Live Status Badge */
+        .status-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #00f59b;
+            border: 3px solid var(--border-jet);
+            box-shadow: 4px 4px 0px var(--border-jet);
+            padding: 7px 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .status-badge i {
+            font-size: 0.6rem;
+            color: #008542;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .avatar-wrapper {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 14px;
+            background: #ffde00;
+            border: 3px solid var(--border-jet);
+            box-shadow: 5px 5px 0px var(--border-jet);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 1.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .handle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ff579f;
+            color: #ffffff;
+            border: 2px solid var(--border-jet);
+            box-shadow: 3px 3px 0px var(--border-jet);
+            padding: 3px 12px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 16px;
+        }
+
+        .bio-box {
+            background: #ffde00;
+            border: 3px solid var(--border-jet);
+            padding: 12px 10px;
+            box-shadow: 4px 4px 0px var(--border-jet);
+        }
+
+        .bio-roles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .role-pill {
+            background: #ffffff;
+            border: 2px solid var(--border-jet);
+            padding: 5px 10px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 3px 3px 0px var(--border-jet);
+        }
+
+        /* Social Links Stack */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            border: 3px solid var(--border-jet);
+            box-shadow: var(--shadow-brutal);
+            min-height: 56px;
+            padding: 8px 12px;
+            font-weight: 900;
+            font-size: 0.98rem;
+            text-transform: uppercase;
+            transition: transform 0.08s ease, box-shadow 0.08s ease;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .link-card:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 3px;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .link-card:hover {
+                transform: translate(4px, 4px);
+                box-shadow: var(--shadow-hover);
+            }
+        }
+
+        .link-card:active {
+            transform: translate(5px, 5px);
+            box-shadow: 0px 0px 0px var(--border-jet);
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-box {
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            background: #ffffff;
+            border: 2px solid var(--border-jet);
+            box-shadow: 2px 2px 0px var(--border-jet);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .arrow-box {
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            background: #ffffff;
+            color: var(--border-jet);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            border: 2px solid var(--border-jet);
+            box-shadow: 2px 2px 0px var(--border-jet);
+        }
+
+        /* Exact Brand Matched Neo-Brutalist Colors */
+        .card-instagram { background-color: var(--insta-bg); color: var(--border-jet); }
+        .card-instagram .icon-box { color: #ff2a85; }
+
+        .card-telegram { background-color: var(--telegram-bg); color: var(--border-jet); }
+        .card-telegram .icon-box { color: #0088cc; }
+
+        .card-youtube { background-color: var(--youtube-bg); color: var(--border-jet); }
+        .card-youtube .icon-box { color: #ff0033; }
+
+        .card-github { background-color: var(--github-bg); color: #ffffff; }
+        .card-github .icon-box { color: #24292e; }
+
+        .card-twitter { background-color: var(--twitter-bg); color: #ffffff; }
+        .card-twitter .icon-box { color: #000000; }
+
+        .card-whatsapp { background-color: var(--whatsapp-bg); color: var(--border-jet); }
+        .card-whatsapp .icon-box { color: #25d366; }
+
+        /* Footer */
+        .footer {
+            margin-top: 18px;
+            background: var(--border-jet);
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            border: 3px solid var(--border-jet);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .footer i {
+            color: #00f59b;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                align-items: flex-start;
+                padding: 14px 12px 20px;
+            }
+
+            .container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .content-body {
+                padding: 16px 12px;
+            }
+
+            .status-badge {
+                font-size: 0.62rem;
+                gap: 6px;
+            }
+
+            .role-pill {
+                padding: 5px 8px;
+                font-size: 0.72rem;
+            }
+
+            .link-card {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Animated Background -->
-    <div class="animated-background">
-        <div class="geometric-shape-1"></div>
-        <div class="geometric-shape-2"></div>
-        <div class="geometric-shape-3"></div>
-    </div>
 
-
-
-    <!-- Main Content -->
     <div class="container">
-        <div class="profile-card">
-            <!-- Profile Section -->
-            <div class="profile-section">
-                <div class="profile-image">
-                    <img src="./photo_2025-07-18_15-36-26_1752833198071.jpg"
-                        alt="Mohit Gupta Profile Picture" id="profileImg">
-                </div>
-                <h1 class="profile-name">Mohit Gupta</h1>
-                <p class="profile-bio">Content Creator | Educator | Explorer</p>
+        <!-- OS Window Bar -->
+        <div class="window-bar">
+            <div class="window-dots">
+                <span class="dot dot-1"></span>
+                <span class="dot dot-2"></span>
+                <span class="dot dot-3"></span>
             </div>
-
-            <!-- Social Links -->
-            <div class="social-links">
-                <a href="https://youtube.com/@mgaiworld?si=rP-_7tWdlEJMWdxa" class="social-link youtube"
-                    target="_blank">
-                    <i class="fab fa-youtube"></i>
-                    <span>YouTube</span>
-                </a>
-
-                <a href="https://instagram.com/mohit_gupta_2006" class="social-link instagram" target="_blank">
-                    <i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-
-                <a href="https://t.me/UnlockedHub" class="social-link telegram" target="_blank">
-                    <i class="fab fa-telegram"></i>
-                    <span>Telegram</span>
-                </a>
-
-                <a href="mailto:mohtgupta2006@gmail.com?subject=Hello%20Mohit&body=Hi%20Mohit,%20I%20found%20your%20profile%20and%20would%20like%20to%20connect." class="social-link email" target="_blank">
-                    <i class="fas fa-envelope"></i>
-                    <span>Email</span>
-                </a>
-
-                <a href="https://mohitgu2006.github.io/ResumeGenerator-github.io/" class="social-link website"
-                    target="_blank">
-                    <i class="fas fa-globe"></i>
-                    <span>Website</span>
-                </a>
-            </div>
+            <div class="window-title">MOHIT_OS.EXE</div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Powered by <span class="creator-name">Mohit Gupta</span></p>
+        <div class="content-body">
+            <div class="status-badge">
+                <i class="fa-solid fa-circle"></i>
+                <span>Open For Freelance & Dev Projects</span>
+            </div>
+
+            <div class="profile-section">
+                <div class="avatar-wrapper">
+                    <img src="https://api.dicebear.com/10.x/pixelbot/svg?seed=MohitGupta" alt="Mohit Gupta Avatar">
+                </div>
+                <h1 class="name">Mohit Gupta</h1>
+                <div class="handle">
+                    <i class="fa-solid fa-at"></i>
+                    <span>mohitgupta</span>
+                </div>
+                <div class="bio-box">
+                    <div class="bio-roles">
+                        <span class="role-pill"><i class="fa-solid fa-code"></i> Developer</span>
+                        <span class="role-pill"><i class="fa-solid fa-pen-ruler"></i> Creator</span>
+                        <span class="role-pill"><i class="fa-solid fa-terminal"></i> Builder</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="links-list">
+                <!-- Instagram -->
+                <a href="https://instagram.com/hostbotpro" target="_blank" rel="noopener noreferrer" class="link-card card-instagram">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- Telegram -->
+                <a href="https://t.me/mohitgupta2006" target="_blank" rel="noopener noreferrer" class="link-card card-telegram">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-telegram"></i>
+                        </div>
+                        <span>Telegram</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@MohitGupta2006Official" target="_blank" rel="noopener noreferrer" class="link-card card-youtube">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/MohitGu2006" target="_blank" rel="noopener noreferrer" class="link-card card-github">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- X / Twitter -->
+                <a href="https://x.com/yourusername" target="_blank" rel="noopener noreferrer" class="link-card card-twitter">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </div>
+                        <span>X (Twitter)</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer" class="link-card card-whatsapp">
+                    <div class="link-left">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <span>WhatsApp</span>
+                    </div>
+                    <div class="arrow-box">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="footer">
+                <i class="fa-solid fa-bolt"></i>
+                <span>NEO-BRUTALISM UI</span>
+                <i class="fa-solid fa-bolt"></i>
+            </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
 </body>
-
 </html>
